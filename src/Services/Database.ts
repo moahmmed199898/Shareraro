@@ -11,6 +11,7 @@ type CallInfo = {
 
 export default class Database {
     private readonly firestore;
+    private callDoc: firebase.firestore.DocumentReference
     constructor() {
         if(firebase.apps.length === 0) {
             firebase.initializeApp(firebaseConfig);
@@ -19,27 +20,32 @@ export default class Database {
     }
 
 
-    public async saveCallData(callData:RTCSessionDescriptionInit):Promise<string> {
-        var callInfo:CallInfo = {
-            call: {
-                sdp:callData.sdp,
-                type: callData.type
-            }
-        }
-        const collection = await this.firestore.collection("calls").add(callInfo);
-        return collection.id;
+    public makeCallDoc() {
+        this.callDoc = this.firestore.collection("calls").doc();
+        return this.callDoc;
     }
 
-    public async getCallData(callID:string):Promise<RTCSessionDescriptionInit> {
-        const doc = await this.firestore.collection("calls").doc(callID).get();
-        const data = await doc.data();
-        const results:RTCSessionDescriptionInit = {
-            sdp: data.call.sdp,
-            type: data.call.type
-        }
-        console.log(results)
-        return results;
+    public getCallDoc(callID:string) {
+        this.callDoc = this.firestore.collection('calls').doc(callID);
+        return this.callDoc;
+    }
 
+    public async saveOffer(offerDescription:RTCSessionDescriptionInit) {
+        const offer = {
+            sdp: offerDescription.sdp,
+            type: offerDescription.type
+        }
+
+        await this.callDoc.set({offer})
+    }
+
+    public async saveAnswer(answerDescription:RTCSessionDescriptionInit) {
+        const answer = {
+            type: answerDescription.type,
+            sdp: answerDescription.sdp,
+        };
+        
+        await this.callDoc.update({ answer });
     }
 
 }

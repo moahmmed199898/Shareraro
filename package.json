@@ -23,7 +23,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prod-serve": "npm run build && serve -s build"
+    "prod-serve": "npm run build && serve -s build",
+    "deploy": "npm run build && firebase deploy"
   },
   "eslintConfig": {
     "extends": [

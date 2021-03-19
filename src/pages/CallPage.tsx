@@ -5,34 +5,42 @@ import ScreenSharer from "../Services/ScreenSharer";
 
 type Props = {}
 type State = {
-    stream:MediaStream
+    stream:MediaStream,
+    callID:string
 }
 export default class CallPage extends React.Component<Props, State> {
 
     constructor(props:Props) {
         super(props);
         this.state = {
-            stream: null
+            stream: null,
+            callID: null,
         }
         this.init();
     }
 
     private async init() {
         const screenSharer = new ScreenSharer();
-        const mediaStream = await screenSharer.getScreenStream();
-        this.setState({
-            stream:mediaStream
-        })
-        
+        const mediaStream = await screenSharer.getScreenStream() 
         const caller = new Caller(mediaStream);
-        await caller.call();
+        let id = await caller.call();
+        this.setState({
+            stream:mediaStream,
+            callID: id
+        })
+    
     }
 
 
     render() {
         return (
             <div>
-                {this.state.stream === null ? <h1>Loading...</h1>: <Stream mediaStream={this.state.stream}></Stream>}
+                {this.state.stream === null ? <h1>Loading...</h1>: 
+                <div>
+                    <h1>{this.state.callID}</h1>
+                    <Stream mediaStream={this.state.stream}></Stream>
+                </div>
+                }
             </div>
         )
     }

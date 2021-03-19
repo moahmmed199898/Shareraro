@@ -31,6 +31,9 @@ export default class AnswerPage extends React.Component<Props,State> {
         this.setState({
             stream: mediaStream
         })
+
+       
+
     }
 
     render() {
