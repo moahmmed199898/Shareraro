@@ -2,13 +2,6 @@ import firebase from "firebase/app"
 import "firebase/firestore";
 import firebaseConfig from "./../firebaseConfig.json";
 
-type CallInfo = {
-    call: {
-        sdp:string
-        type: string
-    }
-}
-
 export default class Database {
     private readonly firestore;
     private callDoc: firebase.firestore.DocumentReference

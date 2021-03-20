@@ -1,6 +1,6 @@
 import React from "react";
-import Receiver from "../Services/Receiver";
-import Stream from "./../components/Stream/Stream";
+import Receiver from "../../Services/Receiver";
+import Stream from "../../components/Stream/Stream";
 
 
 type Props = {}
