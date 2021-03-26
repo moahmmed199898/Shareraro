@@ -22,11 +22,17 @@ export default class Caller extends PeerConnection{
 
         this.setupDatabaseEventListeners();
 
+        await this.database.updateUserStatus(true);
+
         return this.callDoc.id;
 
     }
 
-    
+    public async hangup() {
+        this.pc.close();
+        await this.database.updateUserStatus(false);
+    }
+
     protected async setDatabaseProperties():Promise<void> {
         this.database = new Database();
         this.callDoc = await this.database.makeCallDoc();
@@ -75,5 +81,7 @@ export default class Caller extends PeerConnection{
         await this.pc.setLocalDescription(offerDescription);
         return offerDescription;
     }
+
+
 
 }
