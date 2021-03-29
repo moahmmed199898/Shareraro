@@ -1,29 +1,59 @@
 import React from "react";
 import "./_indexPage.scss"
-import Card from "../../components/Cards/Card";
-import {faDesktop, faDatabase} from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faAngleDoubleDown, faLink, faDesktop, faDatabase, } from "@fortawesome/free-solid-svg-icons"
+import Section from "../../components/Sections/Section";
 export default class IndexPage extends React.Component {
     render() {
         return (
             <div className="IndexPage">
-                <h1 className="title">Shareraro</h1>
-                <p className="description">Share your screen and send large files to your friends with one button <br/>
-                What do you want to do?
-                </p>
-                <div className="cards">
-                    <Card
-                        title="Screen Share"
-                        icon={faDesktop}
-                        description="Share your screen in high quality with all your friends"
-                        color="greenBackground"
-                    />
-                    <Card
-                        title="Data Transfer"
-                        icon={faDatabase}
-                        description="Send large files to your friends easily"
-                        color="purpleBackground"
-                    />
-                </div>
+                <nav>
+                    <h1>Shareraro</h1>
+                    <ul>
+                        <li>Home</li>
+                        <li>Screen Share</li>
+                        <li>Data Transfer</li>
+                        <li><button id="login">Login</button></li>
+                        <li><button id="signup">Signup</button></li>
+                    </ul>
+                </nav>
+
+                <section id="start">
+                    <h1>Shareraro</h1>
+                    <div id="hook">
+                        <span>An easy way to </span>
+                        <span id="screenShare">Share Your Screen</span>
+                        <span> and</span>
+                        <span id="transferFiles"> Transfer Files</span>
+                    </div>
+                </section>
+                <FontAwesomeIcon id="downArrows" icon={faAngleDoubleDown}></FontAwesomeIcon>
+
+
+                <Section title="Peer Connection" icon={faLink} id="peerConnection">
+                    We are using WebRTC technology to establish a real time peer  connection 
+                    so you don't have to warry about our servers being slow or go down. Just 
+                    enjoy your connection.
+                </Section>
+
+
+                <Section title="Screen Share" icon={faDesktop} id="screenShare">
+                Since we are using a peer connection you can 
+                 hare your screen at the highest quality possible. 
+                 You are only limited by your internet connection.
+                </Section>
+
+                <Section title="Data Transfer" icon={faDatabase} id="dataTransfer">
+                Since we are using a peer connection you can 
+                 hare your screen at the highest quality possible. 
+                 You are only limited by your internet connection.
+                </Section>
+
+
+
+
+
+
 
 
                 {/* <Link className={"link"} to={"/call"}>
