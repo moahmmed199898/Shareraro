@@ -1,0 +1,47 @@
+@import "./../../variables";
+    #nav {
+        display: flex;
+        margin-top: 0.5em;
+        justify-content: flex-end;
+        color: $white;
+        width: 80vw;
+        margin: 0 auto;
+        h1 {
+            display: inline;
+            flex-direction: column;
+            font-weight: bold;
+            font-size: 2rem;
+            float: left;
+            margin-right: auto;
+        }
+
+        ul {
+            float: right;
+            display: inline;
+            list-style-type: none;
+            margin-top: 4em;
+            font-size: 0.8rem;
+            li{
+                cursor: pointer;
+                float: left;
+                margin: auto 1em;
+                button {
+                    border: none;
+                    border-radius: 1rem;
+                    width: 7rem;
+                    height: 2rem;
+                    margin-top: -1em;
+                    color: $white;
+                    font-weight: bold;
+                    
+                    
+                }
+                #login {
+                    background-color: $purple;
+                }
+                #signup {
+                    background-color: $red;
+                }
+            }   
+        }
+    }

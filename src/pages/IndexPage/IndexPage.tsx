@@ -3,21 +3,14 @@ import "./_indexPage.scss"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faAngleDoubleDown, faLink, faDesktop, faDatabase, } from "@fortawesome/free-solid-svg-icons"
 import Section from "../../components/Sections/Section";
+import Nav from "../../components/NavBar/Nav";
 export default class IndexPage extends React.Component {
+
     render() {
         return (
             <div className="IndexPage">
-                <nav>
-                    <h1>Shareraro</h1>
-                    <ul>
-                        <li>Home</li>
-                        <li>Screen Share</li>
-                        <li>Data Transfer</li>
-                        <li><button id="login">Login</button></li>
-                        <li><button id="signup">Signup</button></li>
-                    </ul>
-                </nav>
 
+                <Nav />
                 <section id="start">
                     <h1>Shareraro</h1>
                     <div id="hook">
@@ -26,13 +19,13 @@ export default class IndexPage extends React.Component {
                         <span> and</span>
                         <span id="transferFiles"> Transfer Files</span>
                     </div>
+                    <FontAwesomeIcon id="downArrows" icon={faAngleDoubleDown}></FontAwesomeIcon>
                 </section>
-                <FontAwesomeIcon id="downArrows" icon={faAngleDoubleDown}></FontAwesomeIcon>
 
 
                 <Section title="Peer Connection" icon={faLink} id="peerConnection">
                     We are using WebRTC technology to establish a real time peer  connection 
-                    so you don't have to warry about our servers being slow or go down. Just 
+                    so you don't have to worry about our servers being slow or go down. Just 
                     enjoy your connection.
                 </Section>
 

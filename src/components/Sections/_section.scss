@@ -2,20 +2,21 @@
 
 .section {
     height: 100vh;
+    transition: background-color 1s ease-in-out;
     
     h1 {
         text-align: center;
-        font-size: 6rem;
-        margin-top: 1em;
+        font-size: 4rem;
+        margin-top: 20vh;
     }
     .body {
-        display: block;
         display: grid;
         grid-template-columns: repeat(11, 1fr);
+        place-items: center;
         div {
             grid-column-start: 2;
             grid-column-end: 6;
-            font-size: 3rem;
+            font-size: 2rem;
         }
 
         svg {
