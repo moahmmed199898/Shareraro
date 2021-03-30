@@ -2,7 +2,7 @@ import React from "react";
 import firebase from "firebase/app";
 import firebaseConfig from "./firebaseConfig.json";
 import {BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import AnswerPage from "./pages/AnswerPage/AnswerPage";
+import AnswerPage from "./pages/answerPage/AnswerPage";
 import CallPage from "./pages/CallPage";
 import IndexPage from "./pages/IndexPage/IndexPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
