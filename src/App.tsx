@@ -25,10 +25,10 @@ export default class App extends React.Component<Props, State> {
 				<Router>
 					<div id="background"></div>
 					<Switch>
-						<Route exact path="/"><IndexPage /></Route>
-						<Route exact path="/call"><CallPage /></Route>
-						<Route exact path="/answer"><AnswerPage /></Route>
-						<Route exact path="/login"><LoginPage /></Route>
+						<Route exact path="/" component={IndexPage} />
+						<Route exact path="/call" component={CallPage} />
+						<Route exact path="/answer" component={AnswerPage} />
+						<Route exact path="/login" component={LoginPage} />
 					</Switch>
 				</Router>
 		);
