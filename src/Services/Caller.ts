@@ -24,9 +24,6 @@ export default class Caller extends PeerConnection{
 
         await this.database.updateUserStatus(true);
 
-
-        console.log(await this.pc.getStats());
-
         return this.callDoc.id;
 
     }

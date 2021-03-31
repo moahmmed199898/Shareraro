@@ -1,0 +1,29 @@
+@import "./../../variables";
+
+#callPage_pre {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    color: $white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    button {
+        width: 40vw;
+        height: 30vh;
+        border: none;
+        border-radius: 2em;
+        background-color: $pink;
+        color: $white;
+        font-weight: bold;
+        font-size: 1.2rem;
+        transition: all 0.5s ease;
+        margin: 0 auto;
+        display: block;
+    }
+
+    button:hover {
+        width: 42vw;
+        height: 32vh;
+        background-color: darken($pink, $amount: 25);
+    }
+}
