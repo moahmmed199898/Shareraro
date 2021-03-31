@@ -10,16 +10,10 @@ export default class UserManager {
     private user:User;
     private followers: User[];
     private database: Database;
-    private static instance:UserManager = null;
 
     constructor() {
-       if(UserManager.instance === null) { 
-            this.database = new Database();
-            this.user = this.getUserFromFirebase();
-            UserManager.instance = this;
-       } else {
-           return UserManager.instance;
-       }
+        this.database = new Database();
+        this.user = this.getUserFromFirebase();
     }
 
     /**
@@ -66,6 +60,8 @@ export default class UserManager {
 
 
     private getUserFromFirebase():User {
+        if(firebase.auth().currentUser === null) return null
+
         const {displayName, email, photoURL, uid } = firebase.auth().currentUser;
         const user:User = {
             displayName,
@@ -77,7 +73,6 @@ export default class UserManager {
         this.database.addUser(firebase.auth().currentUser);
         this.user = user;
         return user;
-
 
     }
 

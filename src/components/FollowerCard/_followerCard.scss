@@ -1,0 +1,36 @@
+@import "./../../variables";
+
+    .card {
+        display: inline-block;
+        color: $white;
+        background-color: $blue;
+        width: 20vw;
+        height: auto;
+        padding: 1em;
+        border-radius: 1em;
+        margin: 1em;
+        text-align: center;
+        img {
+            padding: 0.2em;
+        }
+
+        button {
+            border: none;
+            border-radius: 0.5em;
+            background-color: $red;
+            color:$white;
+            padding: 1em;
+            transition: all 0.5s ease;
+        }
+
+        button:hover {
+            padding: 1.5em
+        }
+    }
+
+    .disabled {
+        filter: grayscale(1);
+        button:hover {
+            padding: 1em
+        }
+    }

@@ -41,6 +41,7 @@ export default class Nav extends React.Component<Props, State> {
                         Hi, {firebase.auth().currentUser.displayName}
                         <div style={{display:this.state.display}}  onMouseOut={this.onMouseOutHandler.bind(this)} id="dropDownMenu">
                             <ul>
+                                <Link to="/followers" ><li>Followers Page</li></Link>
                                 <li>Logout</li>
                             </ul>
                         </div>
