@@ -29,6 +29,7 @@ export default class CallPage extends React.Component<Props, State> {
             callID: id
         })
     
+        console.log(id)
     }
 
 

@@ -20,10 +20,11 @@ export default class App extends React.Component<Props, State> {
 		this.state = {
 			firebaseSet:false
 		}
-		this.initFirebase();
 	}
 
 	async initFirebase() {
+		if(this.state.firebaseSet) return;
+		
 		if(firebase.apps.length === 0) {
 			firebase.initializeApp(firebaseConfig);	
 		}
@@ -37,6 +38,8 @@ export default class App extends React.Component<Props, State> {
 		
 
 	render() {
+		this.initFirebase();
+
 		if(this.state.firebaseSet) {
 			return (
 					<Router>
