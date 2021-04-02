@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import Nav from "../../components/NavBar/Nav";
 import Stream from "../../components/Stream/Stream";
 import Caller from "../../Services/Caller";
 import ScreenSharer from "../../Services/ScreenSharer";
@@ -28,8 +30,6 @@ export default class CallPage extends React.Component<Props, State> {
             stream:mediaStream,
             callID: id
         })
-    
-        console.log(id)
     }
 
 
@@ -39,6 +39,7 @@ export default class CallPage extends React.Component<Props, State> {
             return (
                 <div id="callPage_pre">
                     <div>
+                    <Nav />
                     <h1>Start by selecting which monitor you want to share</h1>
                     <button onClick={this.onClickHandler.bind(this)}>Click here to select which app/screen to share</button>
                     </div>
@@ -48,7 +49,16 @@ export default class CallPage extends React.Component<Props, State> {
 
         return (
             <div id="callPage_post">
-                    <Stream className="stream" mediaStream={this.state.stream}></Stream>
+                    <Nav />
+                    <div>
+                        <Stream className="stream" mediaStream={this.state.stream}></Stream>
+                        <h1>Send this link to your friends: 
+                            <Link 
+                                to={window.location.protocol + window.location.host + "/answer?" + this.state.callID}>
+                                    {window.location.protocol + window.location.host + "/answer?" + this.state.callID}
+                            </Link>
+                        </h1>
+                    </div>
             </div>
         )
     }

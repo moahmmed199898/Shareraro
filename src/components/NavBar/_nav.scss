@@ -5,7 +5,11 @@
         justify-content: flex-end;
         color: $white;
         width: 80vw;
-        margin: 0 auto;
+        margin: auto;
+        position: absolute;
+        top: 1em;
+        left: 50%;
+        transform: translateX(-50%);
         h1 {
             display: inline;
             flex-direction: column;

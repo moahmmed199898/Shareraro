@@ -5,15 +5,20 @@ import "./_nav.scss";
 
 type Props = {};
 type State = {
-    display: string
+    display: string,
+    currentUser: firebase.User
 }
 export default class Nav extends React.Component<Props, State> {
+
+    private unSubscribeFromFirebase:firebase.Unsubscribe;
 
     constructor(props:Props) {
         super(props);
         this.state ={
-            display: "none"
+            display: "none",
+            currentUser: null
         }
+
     }
 
     onMouseOverHandler() {
@@ -27,8 +32,24 @@ export default class Nav extends React.Component<Props, State> {
             display: "none"
         })
     }
+    componentDidMount() {
+        this.unSubscribeFromFirebase = firebase.auth().onAuthStateChanged(this.onAuthStateChanged.bind(this));
+    }
+
+    componentWillUnmount() {
+        if(this.unSubscribeFromFirebase) this.unSubscribeFromFirebase();
+    }
+
+    onAuthStateChanged(user: firebase.User) {
+        if(user) {
+            this.setState({
+                currentUser: user
+            })
+        }
+    }
 
     render() {
+
         return (
             <nav id="nav">
             <h1>Shareraro</h1>
@@ -36,9 +57,9 @@ export default class Nav extends React.Component<Props, State> {
                 <li>Home</li>
                 <li><Link to="/call">Screen Share</Link></li>
                 <li>Data Transfer</li>
-                {firebase.auth().currentUser ? 
+                {this.state.currentUser ? 
                     <li onMouseOver={this.onMouseOverHandler.bind(this)} onMouseOut={this.onMouseOutHandler.bind(this)}  id="userName">
-                        Hi, {firebase.auth().currentUser.displayName}
+                        Hi, {this.state.currentUser.displayName}
                         <div style={{display:this.state.display}}  onMouseOut={this.onMouseOutHandler.bind(this)} id="dropDownMenu">
                             <ul>
                                 <Link to="/followers" ><li>Followers Page</li></Link>
