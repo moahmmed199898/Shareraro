@@ -37,13 +37,15 @@ export default class CallPage extends React.Component<Props, State> {
 
         if(this.state.stream == null ) {
             return (
-                <div id="callPage_pre">
-                    <div>
+                <>
                     <Nav />
-                    <h1>Start by selecting which monitor you want to share</h1>
-                    <button onClick={this.onClickHandler.bind(this)}>Click here to select which app/screen to share</button>
+                    <div id="callPage_pre">
+                        <div>
+                        <h1>Start by selecting which monitor you want to share</h1>
+                        <button onClick={this.onClickHandler.bind(this)}>Click here to select which app/screen to share</button>
+                        </div>
                     </div>
-                </div>
+                </>
             )
         }
 
