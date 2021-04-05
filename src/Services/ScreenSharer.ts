@@ -28,6 +28,8 @@ export default class ScreenSharer {
     }
 
     public stop():void {
+        let tracks = this.stream.getTracks();
+        tracks.forEach(track=>track.stop());
         this.stream = null;    
     }
 

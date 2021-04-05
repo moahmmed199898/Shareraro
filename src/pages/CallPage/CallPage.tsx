@@ -12,24 +12,29 @@ type State = {
     callID:string
 }
 export default class CallPage extends React.Component<Props, State> {
-
+    private screenSharer = new ScreenSharer();
     constructor(props:Props) {
         super(props);
         this.state = {
             stream: null,
             callID: null,
         }
+
+        this.screenSharer = new ScreenSharer();
     }
 
     private async onClickHandler() {
-        const screenSharer = new ScreenSharer();
-        const mediaStream = await screenSharer.getScreenStream() 
+        const mediaStream = await this.screenSharer.getScreenStream() 
         const caller = new Caller(mediaStream);
         let id = await caller.call();
         this.setState({
             stream:mediaStream,
             callID: id
         })
+    }
+
+    componentWillUnmount() {
+        this.screenSharer.stop();
     }
 
 
