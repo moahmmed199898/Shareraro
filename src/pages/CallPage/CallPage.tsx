@@ -52,12 +52,13 @@ export default class CallPage extends React.Component<Props, State> {
                     <Nav />
                     <div>
                         <Stream className="stream" mediaStream={this.state.stream}></Stream>
-                        <h1>Send this link to your friends: 
-                            <Link 
-                                to={window.location.protocol + window.location.host + "/answer?" + this.state.callID}>
-                                    {window.location.protocol + window.location.host + "/answer?" + this.state.callID}
+                        <div className="info">
+                            <h1>Send this link to your friends:</h1> 
+                            <Link target="_blank"
+                                to={`/answer?${this.state.callID}`}>
+                                    {`${window.location.protocol}//${window.location.host}/answer?${this.state.callID}`}
                             </Link>
-                        </h1>
+                        </div>
                     </div>
             </div>
         )

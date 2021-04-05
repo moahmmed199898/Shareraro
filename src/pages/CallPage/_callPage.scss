@@ -9,7 +9,7 @@
     font-size: 1.2rem;
     button {
         width: 40vw;
-        height: 30vh;
+        height: 20vh;
         border: none;
         border-radius: 2em;
         background-color: $pink;
@@ -23,7 +23,39 @@
 
     button:hover {
         width: 42vw;
-        height: 32vh;
+        height: 25vh;
         background-color: darken($pink, $amount: 25);
+    }
+}
+
+#callPage_post {
+    position: relative;
+    .stream {
+        position: absolute;   
+        height: 60vh;   
+        top: 12vh;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .info {
+        color:$white;
+        position: absolute;
+        top: 73vh;
+        text-align: center;
+        display: block;
+        width: 100vw;
+        font-size: 1.3rem;
+
+        a {
+            transition: all 0.5s ease-in-out;
+            
+            &:hover {
+                background-color: $blue;
+                font-size: 2rem;
+                padding: 1em;
+            }
+        }
+
+
     }
 }

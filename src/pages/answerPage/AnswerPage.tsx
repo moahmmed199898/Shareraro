@@ -1,13 +1,16 @@
 import React from "react";
 import Receiver from "../../Services/Receiver";
 import Stream from "../../components/Stream/Stream";
+import "./_answerPage.scss"
+import Nav from "../../components/NavBar/Nav";
 
 
 
 type Props = {};
 type State = {
     stream:MediaStream,
-    callID:string
+    callID:string,
+    ready: boolean
 }
 
 export default class AnswerPage extends React.Component<Props,State> {
@@ -16,7 +19,18 @@ export default class AnswerPage extends React.Component<Props,State> {
         super(props);
         this.state = {
             stream: null,
-            callID: null
+            callID: "",
+            ready: false
+        }
+    }
+
+    componentDidMount() {
+        let url = window.location.href;
+        let callID = url.split("?")[1];
+        if(callID !== undefined) {
+            this.setState({
+                callID: callID
+            })
         }
     }
 
@@ -27,22 +41,35 @@ export default class AnswerPage extends React.Component<Props,State> {
     }
 
     private async answerClickHandler() {
-        console.log("hello")
         const receiver = new Receiver();
         const mediaStream = await receiver.answer(this.state.callID)
         this.setState({
-            stream: mediaStream
+            stream: mediaStream,
+            ready: true
         })
     }
 
     render() {
 
+        if(!this.state.ready) {
+            return (
+                <>
+                    <Nav />
+                    <div id="answerPage_pre">
+                        <input id="callID" onChange={this.onInputChangeHandler.bind(this)} value={this.state.callID} placeholder="Enter the call ID here" type="text"/>
+                        <input id="answerBtn" value="Answer" type="button" onClick={this.answerClickHandler.bind(this)}/>
+                    </div>
+                </>
+            )
+        }
+
         return (
-            <div>
-                <input onChange={this.onInputChangeHandler.bind(this)} type="text"/>
-                <input type="button" onClick={this.answerClickHandler.bind(this)}/>
-                {this.state.stream === null ? <h1>Loading...</h1>: <Stream controls={true} mediaStream={this.state.stream}></Stream>}
-            </div>
+                <>
+                    <Nav />
+                    <div id="answerPage_post">
+                        <Stream controls={true} mediaStream={this.state.stream}></Stream>
+                    </div>
+                </>
         )
     }
 }

@@ -52,9 +52,9 @@ export default class Nav extends React.Component<Props, State> {
 
         return (
             <nav id="nav">
-            <h1>Shareraro</h1>
+            <h1><Link to="/">Shareraro</Link></h1>
             <ul>
-                <li>Home</li>
+                <li><Link to="/">Home</Link></li>
                 <li><Link to="/call">Screen Share</Link></li>
                 <li>Data Transfer</li>
                 {this.state.currentUser ? 

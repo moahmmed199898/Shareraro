@@ -12,7 +12,7 @@ export default class Stream extends React.Component<Props,State> {
 
 
     render() {
-        return <Video id="stream" autoPlay={true} srcObject={this.props.mediaStream}> </Video>
+        return <Video className="stream" autoPlay={true} srcObject={this.props.mediaStream}> </Video>
     }
 }
 

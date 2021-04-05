@@ -36,7 +36,6 @@ export default class Caller extends PeerConnection{
     protected async setDatabaseProperties():Promise<void> {
         this.database = new Database();
         this.callDoc = await this.database.makeCallDoc();
-        console.log(this.callDoc)
         this.offerCandidates = this.callDoc.collection("offerCandidates");
         this.answerCandidates = this.callDoc.collection("answerCandidates");
     }
