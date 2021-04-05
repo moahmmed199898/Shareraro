@@ -14,10 +14,6 @@ type State = {};
 
 export default class LoginPage extends React.Component<Props, State> {
 
-    // async componentDidMount() {
-    //     await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-    // }
-
     private uiConfig:firebaseui.auth.Config = {
         signInFlow: 'popup',
         signInSuccessUrl: "/",

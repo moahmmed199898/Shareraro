@@ -90,6 +90,7 @@ export default class Database {
      * @param inACall weather the user is in a call or not
      */
     public async updateUserStatus(inACall: boolean) {
+        if(firebase.auth().currentUser === null) return; 
         const doc = await this.getUserDoc();
         await doc.ref.update({
             inACall: inACall

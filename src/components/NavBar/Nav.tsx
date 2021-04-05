@@ -48,6 +48,13 @@ export default class Nav extends React.Component<Props, State> {
         }
     }
 
+    async onLogoutClickHandler() {
+        await firebase.auth().signOut();
+        this.setState({
+            currentUser: null
+        })
+    }
+
     render() {
 
         return (
@@ -63,7 +70,7 @@ export default class Nav extends React.Component<Props, State> {
                         <div style={{display:this.state.display}}  onMouseOut={this.onMouseOutHandler.bind(this)} id="dropDownMenu">
                             <ul>
                                 <Link to="/followers" ><li>Followers Page</li></Link>
-                                <li>Logout</li>
+                                <li onClick={this.onLogoutClickHandler.bind(this)}>Logout</li>
                             </ul>
                         </div>
                     </li>
