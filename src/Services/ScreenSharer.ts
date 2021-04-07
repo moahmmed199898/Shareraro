@@ -28,6 +28,7 @@ export default class ScreenSharer {
     }
 
     public stop():void {
+        if(this.stream === undefined || this.stream === null) return;
         let tracks = this.stream.getTracks();
         tracks.forEach(track=>track.stop());
         this.stream = null;    

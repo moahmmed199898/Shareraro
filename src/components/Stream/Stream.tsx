@@ -1,19 +1,18 @@
-import React, { VideoHTMLAttributes } from "react";
-import Video from "./Video";
+//adapted from  https://github.com/facebook/react/issues/11163
+
+import { VideoHTMLAttributes, useEffect, useRef } from 'react'
 import "./_stream.scss"
-
-type Props = VideoHTMLAttributes<HTMLVideoElement> & {
-    mediaStream:MediaStream,
+type PropsType = VideoHTMLAttributes<HTMLVideoElement> & {
+  mediaStream: MediaStream
 }
 
-type State = {}
+export default function Stream({ mediaStream, ...props }: PropsType) {
+  const refVideo = useRef<HTMLVideoElement>(null)
 
-export default class Stream extends React.Component<Props,State> {
+  useEffect(() => {
+    if (refVideo.current === null) return;
+    refVideo.current.srcObject = mediaStream;
+  })
 
-
-    render() {
-        return <Video className="stream" autoPlay={true} srcObject={this.props.mediaStream}> </Video>
-    }
+  return <video className="stream" controls autoPlay ref={refVideo} {...props} />
 }
-
-
