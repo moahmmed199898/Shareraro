@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Nav from "../../components/NavBar/Nav";
 import Stream from "../../components/Stream/Stream";
-import Caller from "../../Services/Caller";
+import Caller from "../../Services/VideoCall/Caller";
 import ScreenSharer from "../../Services/ScreenSharer";
 import "./_callPage.scss"
 

@@ -1,5 +1,5 @@
-import Database from "./Database";
-import PeerConnection from "./PeerConnection";
+import Database from "../Database";
+import PeerConnection from "../PC/PeerConnection";
 
 export default class Receiver extends PeerConnection{
     private callID:string

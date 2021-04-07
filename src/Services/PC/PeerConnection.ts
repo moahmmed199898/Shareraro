@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 import "firebase/firestore"
-import Database from "./Database";
+import Database from "../Database";
 
 export default abstract class PeerConnection {
     protected readonly iceCandidates:RTCConfiguration;
