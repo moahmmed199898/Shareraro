@@ -9,10 +9,9 @@ export default class ScreenSharer {
             https://github.com/microsoft/TypeScript/issues/33232
             https://github.com/microsoft/TypeScript/issues/31821#issuecomment-607474303
             and thus the easiest option is to ts ignore it until we end up with good typings for it
-
-            Also, this method request the user's screen twice on the dev server but not in prod
-            run npm run prod-serve to see the expected behavior
         */
+
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-ignore
         const mediaStream = await navigator.mediaDevices.getDisplayMedia({audio:true, video: true});
         this.stream = mediaStream;
@@ -29,7 +28,7 @@ export default class ScreenSharer {
 
     public stop():void {
         if(this.stream === undefined || this.stream === null) return;
-        let tracks = this.stream.getTracks();
+        const tracks = this.stream.getTracks();
         tracks.forEach(track=>track.stop());
         this.stream = null;    
     }

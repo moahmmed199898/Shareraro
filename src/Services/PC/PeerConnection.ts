@@ -22,11 +22,11 @@ export default abstract class PeerConnection {
     }
 
 
-    protected setProperties() {
+    protected setProperties():void {
         this.setStreamProperties();
     }
 
-    protected setStreamProperties() {
+    protected setStreamProperties():void {
         this.stream = new MediaStream();
         this.pc = new RTCPeerConnection(this.iceCandidates);
     }

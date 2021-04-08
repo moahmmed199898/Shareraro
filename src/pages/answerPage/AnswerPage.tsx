@@ -6,7 +6,7 @@ import Nav from "../../components/NavBar/Nav";
 
 
 
-type Props = {};
+type Props = unknown;
 type State = {
     stream:MediaStream,
     callID:string,
@@ -24,9 +24,9 @@ export default class AnswerPage extends React.Component<Props,State> {
         }
     }
 
-    componentDidMount() {
-        let url = window.location.href;
-        let callID = url.split("?")[1];
+    componentDidMount():void {
+        const url = window.location.href;
+        const callID = url.split("?")[1];
         if(callID !== undefined) {
             this.setState({
                 callID: callID
@@ -49,7 +49,7 @@ export default class AnswerPage extends React.Component<Props,State> {
         })
     }
 
-    render() {
+    render():JSX.Element {
 
         if(!this.state.ready) {
             return (

@@ -4,7 +4,7 @@ import PeerConnection from "../PC/PeerConnection";
 export default class Receiver extends PeerConnection{
     private callID:string
 
-    public async answer(callID:string) {
+    public async answer(callID:string):Promise<MediaStream> {
         this.callID = callID
         await this.setDatabaseProperties();
 
@@ -12,9 +12,8 @@ export default class Receiver extends PeerConnection{
 
         await this.setOfferDesc();
         const answerDescription = await this.setAnswerDesc();
-        this.database.saveAnswer(answerDescription);
-
-
+        await this.database.saveAnswer(answerDescription);
+        
         this.setupDatabaseEventListeners();
 
         return this.stream;
@@ -43,20 +42,20 @@ export default class Receiver extends PeerConnection{
 
     }
 
-    protected async setOfferDesc() {
+    protected async setOfferDesc():Promise<RTCSessionDescription> {
         const callData = (await this.callDoc.get()).data();
-        const offerDescription = callData.offer;
+        const offerDescription = callData.offer as RTCSessionDescription;
         await this.pc.setRemoteDescription(new RTCSessionDescription(offerDescription));
         return offerDescription;
     }
 
     protected setupDatabaseEventListeners():void {
         this.offerCandidates.onSnapshot((snapshot) => {
-            snapshot.docChanges().forEach((change) => {
+            snapshot.docChanges().forEach(async (change) => {
               console.log(change);
               if (change.type === 'added') {
-                let data = change.doc.data();
-                this.pc.addIceCandidate(new RTCIceCandidate(data));
+                const data = change.doc.data();
+                await this.pc.addIceCandidate(new RTCIceCandidate(data));
               }
             });
           });

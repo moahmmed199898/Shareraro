@@ -6,7 +6,7 @@ import Caller from "../../Services/VideoCall/Caller";
 import ScreenSharer from "../../Services/ScreenSharer";
 import "./_callPage.scss"
 
-type Props = {}
+type Props = unknown
 type State = {
     stream:MediaStream,
     callID:string
@@ -26,19 +26,19 @@ export default class CallPage extends React.Component<Props, State> {
     private async onClickHandler() {
         const mediaStream = await this.screenSharer.getScreenStream() 
         const caller = new Caller(mediaStream);
-        let id = await caller.call();
+        const id = await caller.call();
         this.setState({
             stream:mediaStream,
             callID: id
         })
     }
 
-    componentWillUnmount() {
+    componentWillUnmount():void {
         this.screenSharer.stop();
     }
 
 
-    render() {
+    render():JSX.Element {
 
         if(this.state.stream == null ) {
             return (

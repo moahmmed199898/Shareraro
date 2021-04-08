@@ -9,10 +9,10 @@ type Props = {
     id: string
 }
 
-type State = {}
+type State = unknown
 export default class Section extends React.Component<Props,State> {
 
-    render() {
+    render():JSX.Element {
         return (
             <div {...this.props} className="section">
                 <h1  className="colored">{this.props.title}</h1>

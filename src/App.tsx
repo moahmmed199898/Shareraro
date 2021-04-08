@@ -7,7 +7,7 @@ import CallPage from "./pages/CallPage/CallPage";
 import IndexPage from "./pages/IndexPage/IndexPage";
 import "./App.scss";
 
-type Props = {};
+type Props = unknown;
 type State = {
 	firebaseSet: boolean;
 };
@@ -21,14 +21,14 @@ export default class App extends React.Component<Props, State> {
 		this.initFirebase();
 	}
 
-	async initFirebase() {	
+	initFirebase():void {	
 		if(firebase.apps.length === 0) {
 			firebase.initializeApp(firebaseConfig);	
 		}
 	}
 		
 
-	render() {
+	render():JSX.Element {
 		return (
 				<Router>
 					<div id="background"></div>

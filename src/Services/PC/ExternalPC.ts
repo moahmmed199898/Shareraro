@@ -10,36 +10,36 @@ export default class ExternalPC extends PeerConnection {
         this.answerCandidates = this.callDoc.collection("answerCandidates");
     }
 
-    protected setupPCEventListener():void {
-        this.pc.onicecandidate = (event) => {
-            if(event.candidate) this.offerCandidates.add(event.candidate.toJSON());
+    protected async setupPCEventListener():Promise<void> {
+         this.pc.onicecandidate = async (event) => {
+            if(event.candidate) await this.offerCandidates.add(event.candidate.toJSON());
         };
     }
 
 
-    protected setupDatabaseEventListeners():void {
+    protected async setupDatabaseEventListeners():Promise<void> {
         
-        this.callDoc.onSnapshot((snapshot) => {
+        this.callDoc.onSnapshot(async (snapshot) => {
             const data = snapshot.data();
             if (!this.pc.currentRemoteDescription && data?.answer) {
               const answerDescription = new RTCSessionDescription(data.answer);
-              this.pc.setRemoteDescription(answerDescription);
+              await this.pc.setRemoteDescription(answerDescription);
             }
           });
         
           // When answered, add candidate to peer connection
-          this.answerCandidates.onSnapshot((snapshot) => {
-            snapshot.docChanges().forEach((change) => {
+          this.answerCandidates.onSnapshot(async (snapshot) => {
+            snapshot.docChanges().forEach(async (change) => {
               if (change.type === 'added') {
                 const candidate = new RTCIceCandidate(change.doc.data());
-                this.pc.addIceCandidate(candidate);
+                await this.pc.addIceCandidate(candidate);
               }
             });
           });
         
     }
 
-    protected async getOfferDesc() {
+    protected async getOfferDesc():Promise<RTCSessionDescriptionInit> {
         const offerDescription = await this.pc.createOffer();
         await this.pc.setLocalDescription(offerDescription);
         return offerDescription;

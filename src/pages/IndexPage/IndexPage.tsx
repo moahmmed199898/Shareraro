@@ -6,7 +6,7 @@ import Section from "../../components/Sections/Section";
 import Nav from "../../components/NavBar/Nav";
 export default class IndexPage extends React.Component {
 
-    render() {
+    render():JSX.Element {
         return (
             <div className="IndexPage">
 
@@ -25,7 +25,7 @@ export default class IndexPage extends React.Component {
 
                 <Section title="Peer Connection" icon={faLink} id="peerConnection">
                     We are using WebRTC technology to establish a real time peer  connection 
-                    so you don't have to worry about our servers being slow or go down. Just 
+                    so you don&apos;t have to worry about our servers being slow or go down. Just 
                     enjoy your connection.
                 </Section>
 

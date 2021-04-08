@@ -2,11 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./_nav.scss";
 
-type Props = {};
-type State = {}
-export default class Nav extends React.Component<Props, State> {
+export default class Nav extends React.Component {
 
-    render() {
+    render():JSX.Element {
 
         return (
             <nav id="nav">

@@ -8,7 +8,7 @@ export default class Caller extends ExternalPC{
         this.stream = mediaStream;
     }
 
-    public async call() {
+    public async call():Promise<string> {
         await this.setDatabaseProperties();
 
         this.pushStreamTracksToPC();
@@ -25,7 +25,7 @@ export default class Caller extends ExternalPC{
 
     }
 
-    public hangup() {
+    public hangup():void {
         this.pc.close();
     }
 
