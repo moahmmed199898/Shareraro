@@ -21,15 +21,12 @@ export default class Caller extends ExternalPC{
 
         this.setupDatabaseEventListeners();
 
-        await this.database.updateUserStatus(true);
-
         return this.callDoc.id;
 
     }
 
-    public async hangup() {
+    public hangup() {
         this.pc.close();
-        await this.database.updateUserStatus(false);
     }
 
     private pushStreamTracksToPC() {

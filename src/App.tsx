@@ -5,8 +5,6 @@ import firebaseConfig from "./firebaseConfig.json";
 import AnswerPage from "./pages/AnswerPage/AnswerPage";
 import CallPage from "./pages/CallPage/CallPage";
 import IndexPage from "./pages/IndexPage/IndexPage";
-import LoginPage from "./pages/LoginPage/LoginPage";
-import FollowersPage from "./pages/FollowersPage/FollowersPage";
 import "./App.scss";
 
 type Props = {};
@@ -20,42 +18,27 @@ export default class App extends React.Component<Props, State> {
 		this.state = {
 			firebaseSet:false
 		}
+		this.initFirebase();
 	}
 
-	async initFirebase() {
-		if(this.state.firebaseSet) return;
-		
+	async initFirebase() {	
 		if(firebase.apps.length === 0) {
 			firebase.initializeApp(firebaseConfig);	
 		}
-
-		firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(()=>{
-			this.setState({
-				firebaseSet:true
-			})
-		})
 	}
 		
 
 	render() {
-		this.initFirebase();
-
-		if(this.state.firebaseSet) {
-			return (
-					<Router>
-						<div id="background"></div>
-						<Switch>
-							<Route exact path="/" component={IndexPage} />
-							<Route exact path="/call" component={CallPage} />
-							<Route exact path="/answer" component={AnswerPage} />
-							<Route exact path="/login" component={LoginPage} />
-							<Route exact path="/followers" component={FollowersPage} />
-						</Switch>
-					</Router>
-			);
-		} else {
-			return <h1>Loading</h1>
-		}
+		return (
+				<Router>
+					<div id="background"></div>
+					<Switch>
+						<Route exact path="/" component={IndexPage} />
+						<Route exact path="/call" component={CallPage} />
+						<Route exact path="/answer" component={AnswerPage} />
+					</Switch>
+				</Router>
+		);
 		
 	}
 }
