@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faCheck} from "@fortawesome/free-solid-svg-icons"
 import Nav from "../../components/NavBar/Nav";
 import Stream from "../../components/Stream/Stream";
 import Caller from "../../Services/VideoCall/Caller";
@@ -9,7 +10,8 @@ import "./_callPage.scss"
 type Props = unknown
 type State = {
     stream:MediaStream,
-    callID:string
+    callID:string,
+    copied:boolean
 }
 export default class CallPage extends React.Component<Props, State> {
     private screenSharer = new ScreenSharer();
@@ -18,6 +20,7 @@ export default class CallPage extends React.Component<Props, State> {
         this.state = {
             stream: null,
             callID: null,
+            copied: false
         }
 
         this.screenSharer = new ScreenSharer();
@@ -37,6 +40,9 @@ export default class CallPage extends React.Component<Props, State> {
         const clipBoard = await navigator.permissions.query({name: "clipboard-write"});
         if(clipBoard.state == "granted") {
             await navigator.clipboard.writeText(`${window.location.protocol}//${window.location.host}/answer?${this.state.callID}`);  
+            this.setState({
+                copied:true
+            })
         } else {
             console.log("no permission")
         }
@@ -55,7 +61,9 @@ export default class CallPage extends React.Component<Props, State> {
                     <div id="callPage_pre">
                         <div>
                         <h1>Start by selecting which monitor you want to share</h1>
-                        <button onClick={this.onClickHandler.bind(this)}>Click here to select which app/screen to share</button>
+                        <button 
+                            onClick={this.onClickHandler.bind(this)}>Click here to select which app/screen to share
+                        </button>
                         </div>
                     </div>
                 </>
@@ -69,11 +77,15 @@ export default class CallPage extends React.Component<Props, State> {
                         <Stream className="stream" mediaStream={this.state.stream}></Stream>
                         <div className="info">
                             <h1>Send this link to your friends:</h1> 
-                            <Link target="_blank"
-                                to={`/answer?${this.state.callID}`}>
+                                <div className="link" onClick={this.onCopyClickHandler.bind(this)}>
                                     {`${window.location.protocol}//${window.location.host}/answer?${this.state.callID}`}
-                            </Link>
-                            <button className="copyButton" onClick={this.onCopyClickHandler.bind(this)}>Copy</button>
+                                </div>
+                            <button 
+                            className={this.state.copied? 'copyButton copied' : 'copyButton'} 
+                            onClick={this.onCopyClickHandler.bind(this)}>
+                                {this.state.copied? <FontAwesomeIcon icon={faCheck} className="check"/> : null }
+                                {this.state.copied? "copied" : "copy" }
+                            </button>
                         </div>
                     </div>
             </div>
