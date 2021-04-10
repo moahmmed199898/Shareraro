@@ -19,6 +19,9 @@
             float: left;
             margin-right: auto;
             cursor: pointer;
+            @media screen and (max-width:$screen-tablet){
+                display: none;
+            }
         }
 
         ul {
@@ -27,6 +30,18 @@
             list-style-type: none;
             margin-top: 2.2em;
             font-size: 1.3rem;
+            
+            @media screen and (max-width:$screen-tablet){
+                width: 100%;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+            }
+
+            @media screen and (max-width:$screen-mobile) {
+                font-size: 0.8rem;
+            }
+
             li{
                 cursor: pointer;
                 float: left;
@@ -42,6 +57,8 @@
                     
                     
                 }
-            }   
+            }
         }
     }
+
+

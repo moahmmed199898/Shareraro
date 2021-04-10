@@ -32,7 +32,8 @@
 
     #answerBtn {
         margin-top: 2em;
-        width: 20vw;
+        min-width: 20vw;
+        padding: 0 2rem;
         border: none;
         border-radius: 2em;
         background-color: $red;
