@@ -33,10 +33,18 @@ export default class CallPage extends React.Component<Props, State> {
         })
     }
 
+    private async onCopyClickHandler() {
+        const clipBoard = await navigator.permissions.query({name: "clipboard-write"});
+        if(clipBoard.state == "granted") {
+            await navigator.clipboard.writeText(`${window.location.protocol}//${window.location.host}/answer?${this.state.callID}`);  
+        } else {
+            console.log("no permission")
+        }
+    }
+
     componentWillUnmount():void {
         this.screenSharer.stop();
     }
-
 
     render():JSX.Element {
 
@@ -65,6 +73,7 @@ export default class CallPage extends React.Component<Props, State> {
                                 to={`/answer?${this.state.callID}`}>
                                     {`${window.location.protocol}//${window.location.host}/answer?${this.state.callID}`}
                             </Link>
+                            <button className="copyButton" onClick={this.onCopyClickHandler.bind(this)}>Copy</button>
                         </div>
                     </div>
             </div>
