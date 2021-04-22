@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faCheck} from "@fortawesome/free-solid-svg-icons"
 import Nav from "../../components/NavBar/Nav";
 import Stream from "../../components/Stream/Stream";
-import Caller from "../../Services/VideoCall/Caller";
+import Caller from "../../Services/PC/VideoCall/Caller";
 import ScreenSharer from "../../Services/ScreenSharer";
 import "./_callPage.scss"
 

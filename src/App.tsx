@@ -6,6 +6,7 @@ import AnswerPage from "./pages/AnswerPage/AnswerPage";
 import CallPage from "./pages/CallPage/CallPage";
 import IndexPage from "./pages/IndexPage/IndexPage";
 import "./App.scss";
+import DataSend from "./pages/DataSend";
 
 type Props = unknown;
 type State = {
@@ -36,6 +37,7 @@ export default class App extends React.Component<Props, State> {
 						<Route exact path="/" component={IndexPage} />
 						<Route exact path="/call" component={CallPage} />
 						<Route exact path="/answer" component={AnswerPage} />
+						<Route exact path="/data/send" component={DataSend} />
 					</Switch>
 				</Router>
 		);
