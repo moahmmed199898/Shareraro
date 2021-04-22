@@ -1,4 +1,4 @@
-import ExternalPC from "../PC/ExternalPC";
+import ExternalPC from "../ExternalPC";
 
 export default class Caller extends ExternalPC{
 
@@ -13,13 +13,13 @@ export default class Caller extends ExternalPC{
 
         this.pushStreamTracksToPC();
 
-        this.setupPCEventListener();
+        await this.setupPCEventListener();
 
         const offerDescription = await this.getOfferDesc();
 
         await this.database.saveOffer(offerDescription)
 
-        this.setupDatabaseEventListeners();
+        await this.setupDatabaseEventListeners();
 
         return this.callDoc.id;
 

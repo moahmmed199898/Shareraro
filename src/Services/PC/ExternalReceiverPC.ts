@@ -1,10 +1,10 @@
 import Database from "../Database";
 import PeerConnection from "../PC/PeerConnection";
 
-export default class Receiver extends PeerConnection{
-    private callID:string
+export default abstract class ExternalReceiverPC extends PeerConnection {
+    protected callID:string
 
-    public async answer(callID:string):Promise<MediaStream> {
+    public async prepConnection(callID:string):Promise<void> {
         this.callID = callID
         await this.setDatabaseProperties();
 
@@ -15,12 +15,8 @@ export default class Receiver extends PeerConnection{
         await this.database.saveAnswer(answerDescription);
         
         this.setupDatabaseEventListeners();
-
-        return this.stream;
     }
 
-
-    
     protected async setDatabaseProperties():Promise<void> {
         this.database = new Database();
         this.callDoc =  this.database.getCallDoc(this.callID);
@@ -29,18 +25,7 @@ export default class Receiver extends PeerConnection{
         return Promise.resolve();
     }
 
-    protected setupPCEventListener():void {
-        this.pc.ontrack = (event) => {
-            event.streams[0].getTracks().forEach((track) => {
-              this.stream.addTrack(track);
-            });
-          };
-
-        this.pc.onicecandidate = (event) => {
-            event.candidate && this.answerCandidates.add(event.candidate.toJSON());
-        };
-
-    }
+    protected abstract setupPCEventListener():void;
 
     protected async setOfferDesc():Promise<RTCSessionDescription> {
         const callData = (await this.callDoc.get()).data();
@@ -52,7 +37,6 @@ export default class Receiver extends PeerConnection{
     protected setupDatabaseEventListeners():void {
         this.offerCandidates.onSnapshot((snapshot) => {
             snapshot.docChanges().forEach(async (change) => {
-              console.log(change);
               if (change.type === 'added') {
                 const data = change.doc.data();
                 await this.pc.addIceCandidate(new RTCIceCandidate(data));
@@ -61,7 +45,7 @@ export default class Receiver extends PeerConnection{
           });
     }
 
-    private async setAnswerDesc() {
+    protected async setAnswerDesc():Promise<RTCSessionDescriptionInit> {
         const answerDescription = await this.pc.createAnswer();
         await this.pc.setLocalDescription(answerDescription);
         return answerDescription;

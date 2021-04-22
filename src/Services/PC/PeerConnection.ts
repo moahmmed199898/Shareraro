@@ -13,7 +13,16 @@ export default abstract class PeerConnection {
 
     constructor() {
         this.iceCandidates =  {
-            iceServers: [{urls: ['stun:stun1.l.google.com:19302', 'stun:stun2.l.google.com:19302'],},],
+            iceServers: [
+                {
+                    urls: ['stun:stun1.l.google.com:19302', 'stun:stun2.l.google.com:19302'],
+                },
+                {
+                    urls: ['turn:turn.shareraro.com'],
+                    username:"guest",
+                    credential:"somepassword"
+                }
+            ],
             iceCandidatePoolSize: 10,
         };
 
@@ -32,7 +41,6 @@ export default abstract class PeerConnection {
     }
 
     protected abstract setDatabaseProperties():Promise<void>;
-    protected abstract setDatabaseProperties():Promise<void>
     protected abstract setupPCEventListener():void
     protected abstract setupDatabaseEventListeners():void
 } 
