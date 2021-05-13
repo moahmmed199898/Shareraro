@@ -3,6 +3,7 @@ import Receiver from "../../Services/PC/VideoCall/Receiver";
 import Stream from "../../components/Stream/Stream";
 import "./_answerPage.scss"
 import Nav from "../../components/NavBar/Nav";
+import Signaling from "../../Services/Signaling";
 
 
 
@@ -41,8 +42,11 @@ export default class AnswerPage extends React.Component<Props,State> {
     }
 
     private async answerClickHandler() {
-        const receiver = new Receiver();
-        const mediaStream = await receiver.answer(this.state.callID)
+        // const receiver = new Receiver();
+        // const mediaStream = await receiver.answer(this.state.callID)
+        const signaling = new Signaling();
+        await signaling.signalAnswer(this.state.callID);
+        const mediaStream = await signaling.getStream();
         this.setState({
             stream: mediaStream,
             ready: true

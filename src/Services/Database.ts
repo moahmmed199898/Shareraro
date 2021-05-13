@@ -1,5 +1,6 @@
 import firebase from "firebase/app"
 import "firebase/firestore";
+import { Signal } from './../../types/Signal';
 import firebaseConfig from "./../firebaseConfig.json";
 
 export default class Database {
@@ -59,6 +60,21 @@ export default class Database {
         };
         
         await this.callDoc.update({ answer });
+    }
+
+
+    public async makeSignalDoc():Promise<firebase.firestore.DocumentReference> {
+        const signal:Signal = {
+            waitingCalls:[]
+        }
+
+        const doc = await this.firestore.collection("signals").add(signal);
+        return doc;
+    }
+
+    public getSignalDoc(id:string):firebase.firestore.DocumentReference {
+        const doc = this.firestore.collection("signals").doc(id);
+        return doc;
     }
 
 
