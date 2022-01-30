@@ -6,19 +6,17 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
-    "firebase": "^8.6.1",
+    "firebase": "^9.6.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "5.0.0",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "set \"GENERATE_SOURCEMAP=false\" &&  react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prod-serve": "npm run build && serve -s build",
     "deploy": "npm run build && firebase deploy"
   },
   "eslintConfig": {
@@ -47,8 +45,8 @@
     "@typescript-eslint/parser": "^4.21.0",
     "eslint": "^7.26.0",
     "eslint-plugin-react": "^7.23.2",
+    "postcss": "^8.4.5",
     "sass": "^1.32.13",
-    "serve": "^11.3.2",
-    "typescript": "^4.2.4"
+    "typescript": "^4.5.5"
   }
 }
