@@ -31,7 +31,6 @@ export default class App extends React.Component<Props, State> {
 	render():JSX.Element {
 		return (
 				<Router>
-					<div id="background"></div>
 					<Switch>
 						<Route exact path="/" component={IndexPage} />
 						<Route exact path="/call" component={CallPage} />

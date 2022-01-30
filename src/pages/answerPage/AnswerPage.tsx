@@ -1,5 +1,4 @@
 import React from "react";
-import Receiver from "../../Services/PC/VideoCall/Receiver";
 import Stream from "../../components/Stream/Stream";
 import Nav from "../../components/NavBar/Nav";
 import Signaling from "../../Services/Signaling";
@@ -8,14 +7,14 @@ import Signaling from "../../Services/Signaling";
 
 type Props = unknown;
 type State = {
-    stream:MediaStream,
-    callID:string,
+    stream: MediaStream,
+    callID: string,
     ready: boolean
 }
 
-export default class AnswerPage extends React.Component<Props,State> {
+export default class AnswerPage extends React.Component<Props, State> {
 
-    constructor(props:Props) {
+    constructor(props: Props) {
         super(props);
         this.state = {
             stream: null,
@@ -24,14 +23,18 @@ export default class AnswerPage extends React.Component<Props,State> {
         }
     }
 
-    componentDidMount():void {
+    async componentDidMount() {
         const url = window.location.href;
         const callID = url.split("?")[1];
-        if(callID !== undefined) {
-            this.setState({
-                callID: callID
-            })
-        }
+        
+
+        const signaling = new Signaling();
+        await signaling.signalAnswer(callID);
+        const mediaStream = await signaling.getStream();
+        this.setState({
+            stream: mediaStream,
+            ready: true
+        })
     }
 
     private onInputChangeHandler(event: React.ChangeEvent<HTMLInputElement>) {
@@ -40,39 +43,26 @@ export default class AnswerPage extends React.Component<Props,State> {
         })
     }
 
-    private async answerClickHandler() {
-        // const receiver = new Receiver();
-        // const mediaStream = await receiver.answer(this.state.callID)
-        const signaling = new Signaling();
-        await signaling.signalAnswer(this.state.callID);
-        const mediaStream = await signaling.getStream();
-        this.setState({
-            stream: mediaStream,
-            ready: true
-        })
-    }
 
-    render():JSX.Element {
-
-        if(!this.state.ready) {
+    render(): JSX.Element {
+        if (!this.state.ready) {
             return (
-                <>
+                <div className="h-screen grid bg-gray-900 text-white text-center">
                     <Nav />
-                    <div id="answerPage_pre">
-                        <input id="callID" onChange={this.onInputChangeHandler.bind(this)} value={this.state.callID} placeholder="Enter the call ID here" type="text"/>
-                        <input id="answerBtn" value="Answer" type="button" onClick={this.answerClickHandler.bind(this)}/>
+                    <div className="block m-auto text-7xl">
+                        Loading....
                     </div>
-                </>
+                </div>
             )
         }
 
         return (
-                <>
-                    <Nav />
-                    <div id="answerPage_post">
-                        <Stream controls={true} mediaStream={this.state.stream}></Stream>
-                    </div>
-                </>
+            <div>
+                <Nav />
+                <div className="h-screen bg-gray-900 text-white block items-center pt-40">
+                    <Stream className="w-8/12 m-auto" controls={true} autoPlay mediaStream={this.state.stream}></Stream>
+                </div>
+            </div>
         )
     }
 }
