@@ -1,7 +1,6 @@
 import React from "react";
 import Receiver from "../../Services/PC/VideoCall/Receiver";
 import Stream from "../../components/Stream/Stream";
-import "./_answerPage.scss"
 import Nav from "../../components/NavBar/Nav";
 import Signaling from "../../Services/Signaling";
 

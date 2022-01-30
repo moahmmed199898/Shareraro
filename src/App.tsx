@@ -5,7 +5,6 @@ import firebaseConfig from "./firebaseConfig.json";
 import AnswerPage from "./pages/AnswerPage/AnswerPage";
 import CallPage from "./pages/CallPage/CallPage";
 import IndexPage from "./pages/IndexPage/IndexPage";
-import "./App.scss";
 import DataSend from "./pages/DataSend";
 
 type Props = unknown;

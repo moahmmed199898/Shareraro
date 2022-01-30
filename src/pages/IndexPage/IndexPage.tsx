@@ -1,5 +1,4 @@
 import React from "react";
-import "./_indexPage.scss"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faAngleDoubleDown, faLink, faDesktop, faDatabase, } from "@fortawesome/free-solid-svg-icons"
 import Section from "../../components/Sections/Section";

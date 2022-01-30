@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./_nav.scss";
 
 export default class Nav extends React.Component {
 

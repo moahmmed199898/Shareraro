@@ -5,7 +5,6 @@ import Nav from "../../components/NavBar/Nav";
 import Stream from "../../components/Stream/Stream";
 import Caller from "../../Services/PC/VideoCall/Caller";
 import ScreenSharer from "../../Services/ScreenSharer";
-import "./_callPage.scss"
 import Signaling from "../../Services/Signaling";
 
 type Props = unknown
@@ -40,7 +39,8 @@ export default class CallPage extends React.Component<Props, State> {
     }
 
     private async onCopyClickHandler() {
-        const clipBoard = await navigator.permissions.query({name: "clipboard-write"});
+        const permissionName = "clipboard-write" as PermissionName;
+        const clipBoard = await navigator.permissions.query({ name: permissionName });
         if(clipBoard.state == "granted") {
             await navigator.clipboard.writeText(`${window.location.protocol}//${window.location.host}/answer?${this.state.callID}`);  
             this.setState({
