@@ -1,18 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./_nav.scss";
 
 export default class Nav extends React.Component {
 
     render():JSX.Element {
 
         return (
-            <nav id="nav">
-            <h1><Link to="/">Shareraro</Link></h1>
-            <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/call">Screen Share</Link></li>
-                <li>Data Transfer</li>
+            <nav className="flex justify-around mt-5 absolute w-screen text-white">
+            <h1 className="font-bold text-4xl cursor-pointer tracking-widest"><Link to="/">Shareraro</Link></h1>
+            <ul className="flex gap-5 text-2xl">
+                <li className="cursor-pointer"><Link to="/">Home</Link></li>
+                <li className="cursor-pointer hover:text-green-600 transition-all"><Link to="/call">Start a Share</Link></li>
             </ul>
         </nav>
 

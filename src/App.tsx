@@ -5,7 +5,6 @@ import firebaseConfig from "./firebaseConfig.json";
 import AnswerPage from "./pages/AnswerPage/AnswerPage";
 import CallPage from "./pages/CallPage/CallPage";
 import IndexPage from "./pages/IndexPage/IndexPage";
-import "./App.scss";
 import DataSend from "./pages/DataSend";
 
 type Props = unknown;
@@ -32,7 +31,6 @@ export default class App extends React.Component<Props, State> {
 	render():JSX.Element {
 		return (
 				<Router>
-					<div id="background"></div>
 					<Switch>
 						<Route exact path="/" component={IndexPage} />
 						<Route exact path="/call" component={CallPage} />

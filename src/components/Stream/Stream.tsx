@@ -1,7 +1,6 @@
 //adapted from  https://github.com/facebook/react/issues/11163
 
 import React, { VideoHTMLAttributes, useEffect, useRef } from 'react'
-import "./_stream.scss"
 type PropsType = VideoHTMLAttributes<HTMLVideoElement> & {
   mediaStream: MediaStream
 }
